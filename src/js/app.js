@@ -14,8 +14,9 @@ const URL_MoviesGenres = 'genre/movie/list'
 
 async function getTrendingMoviesPreview() {
     const { data } = await api(URL_TrendingMovies)
-
     const movies = data.results
+
+    trendingMoviesPreviewList.innerHTML = ''
     movies.forEach(movie => {
         const movieContainer = document.createElement('div')
         movieContainer.classList.add('movie-container')
@@ -32,8 +33,9 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
     const { data } = await api(URL_MoviesGenres)
-
     const categories = data.genres
+    
+    categoriesPreviewList.innerHTML = ''
     categories.forEach(category => {
         const categoryContainer = document.createElement('div')
         categoryContainer.classList.add('category-container')
