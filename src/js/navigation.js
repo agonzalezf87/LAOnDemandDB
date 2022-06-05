@@ -4,9 +4,13 @@ arrowBtn.onclick = () => location.hash = '#home'
 
 window.addEventListener('DOMContentLoaded', navigator, false)
 window.addEventListener('hashchange', navigator, false)
+body.onload = () => body.scrollTop = 0
 
 function navigator() {
     location.hash.startsWith('#trends') ? trendsPage() : location.hash.startsWith('#search=') ? searchPage() : location.hash.startsWith('#movie=') ? movieDetailsPage() : location.hash.startsWith('#category=') ? categoriesPage() : homePage()
+
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
 }
 
 function homePage() {
@@ -74,6 +78,12 @@ function categoriesPage() {
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+    
+    const [_ , categoryData] = location.hash.split('=')
+    const [categoryId, categoryName] = categoryData.split('-')
+
+    headerCategoryTitle.innerText = categoryName.replace('_', ' ')
+    getMoviesByCategory(categoryId)
 }
 
 function trendsPage() {

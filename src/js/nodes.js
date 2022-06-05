@@ -1,6 +1,8 @@
 /*---------- JS Magic! ----------*/
 const $ = (id) => document.querySelector(id)
 
+const body = $('body')
+
 /*---------- Sections ----------*/
 const headerSection = $('#header')
 const trendingPreviewSection = $('#trendingPreview')
