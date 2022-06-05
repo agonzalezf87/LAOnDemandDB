@@ -27,6 +27,9 @@ const searchFormBtn = $('#searchBtn')
 
 const trendingBtn = $('.trendingPreview-btn')
 
-const movieDetailTitle = $('movieDetail-title')
+const movieDetailTitle = $('.movieDetail-title')
 const movieDetailDescription = $('.movieDetail-description')
 const movieDetailScore = $('.movieDetail-score')
+
+/*---------- Helpers ----------
+var history*/

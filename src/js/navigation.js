@@ -1,6 +1,11 @@
-searchFormBtn.onclick = () => location.hash = '#search='
+searchFormBtn.onclick = () => location.hash = `#search=${searchFormInput.value}`
+
+searchForm.onsubmit = (evt) => {
+    evt.preventDefault()
+    searchFormBtn.click()
+}
 trendingBtn.onclick = () => location.hash = '#trends'
-arrowBtn.onclick = () => location.hash = '#home'
+arrowBtn.onclick = () => window.history.back()
 
 window.addEventListener('DOMContentLoaded', navigator, false)
 window.addEventListener('hashchange', navigator, false)
@@ -14,7 +19,7 @@ function navigator() {
 }
 
 function homePage() {
-    // console.log('Home!!')
+    searchFormInput.value = ''
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = ''
     arrowBtn.classList.add('inactive')
@@ -27,31 +32,31 @@ function homePage() {
     categoriesPreviewSection.classList.remove('inactive')
     genericSection.classList.add('inactive')
     movieDetailSection.classList.add('inactive')
-    
+
     getTrendingMoviesPreview()
     getCategoriesPreview()
 }
 
 function searchPage() {
-    // console.log('Search!!')
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = ''
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
-    headerCategoryTitle.classList.remove('inactive')
+    headerCategoryTitle.classList.add('inactive')
     searchForm.classList.remove('inactive')
     
     trendingPreviewSection.classList.add('inactive')
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+
+    const [_ , query] = location.hash.split('=')
+    getMoviesBySearch(query)
 }
 
 function movieDetailsPage() {
-    // console.log('Movie!!')
     headerSection.classList.add('header-container--long')
-    // headerSection.style.background = ''
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.add('header-arrow--white')
     headerTitle.classList.add('inactive')
@@ -62,10 +67,12 @@ function movieDetailsPage() {
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.add('inactive')
     movieDetailSection.classList.remove('inactive')
+
+    const [_, movieId] = location.hash.split('=')
+    getMovieById(movieId)
 }
 
 function categoriesPage() {
-    // console.log('Category!!')
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = ''
     arrowBtn.classList.remove('inactive')
@@ -87,7 +94,6 @@ function categoriesPage() {
 }
 
 function trendsPage() {
-    // console.log('Trends!!')
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = ''
     arrowBtn.classList.remove('inactive')
@@ -100,4 +106,7 @@ function trendsPage() {
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+
+    headerCategoryTitle.innerText = 'Tendencias'
+    getTrendingMovies()
 }
